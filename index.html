@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bike Map</title>
+  <style>
+    /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+    #map {
+      height: 100%;
+    }
+
+    /* Optional: Makes the sample page fill the window. */
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <!-- <div style="position: fixed; z-index: 50000000; bottom: 0;">
+    <strong>Mode of Travel: </strong>
+    <select id="mode" onchange="calcRoute();">
+      <option value="DRIVING">Driving</option>
+      <option value="WALKING">Walking</option>
+      <option value="BICYCLING">Bicycling</option>
+      <option value="TRANSIT">Transit</option>
+    </select>
+  </div> -->
+  <script>
+    var map;
+    async function initMap() {
+      // var noble;
+      // geocoder = new google.maps.Geocoder();
+      // resp = geocoder.geocode({ 'address': '910 Noble St, Indianapolis, IN 46203' }).asPromise();
+      // directionsService = new google.maps.DirectionsService();
+      // haight = new google.maps.LatLng(37.7699298, -122.4469157);
+      // oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
+      var mapOptions = {
+        zoom: 6,
+        center: new google.maps.LatLng(44.576425, -123.884995),
+        mapTypeId: 'terrain'
+      }
+      map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      // calcRoute();
+      // calcRoute2();
+      kmlGuy();
+    }
+
+    // function calcRoute() {
+    //   var directionsRenderer = new google.maps.DirectionsRenderer();
+    //   directionsRenderer.setMap(map);
+    //   var selectedMode = document.getElementById('mode').value;
+    //   var request = {
+    //     origin: haight,
+    //     destination: oceanBeach,
+    //     // Note that JavaScript allows us to access the constant
+    //     // using square brackets and a string value as its
+    //     // "property."
+    //     travelMode: google.maps.TravelMode[selectedMode]
+    //   };
+    //   directionsService.route(request, function (response, status) {
+    //     if (status == 'OK') {
+    //       directionsRenderer.setDirections(response);
+    //     }
+    //   });
+    // }
+
+    function kmlGuy(){
+      var src = 'https://drive.google.com/open?id=1lLrp0L0ZGT_ODXZADY39S4FXIKymYHJq';
+      // var src = 'https://developers.google.com/maps/documentation/javascript/examples/kml/westcampus.kml';
+
+      var kmlLayer = new google.maps.KmlLayer(src, {
+        suppressInfoWindows: true,
+        preserveViewport: false,
+        map: map
+      });
+      debugger
+    }
+
+    // function calcRoute2() {
+    //   var directionsRenderer = new google.maps.DirectionsRenderer();
+    //   directionsRenderer.setMap(map);
+    //     wash = new google.maps.LatLng(47.662912, -122.544631)
+    //     wyo = new google.maps.LatLng(44.640331, -108.962975)
+    //     var request = {
+    //       origin: wash,
+    //       destination: wyo,
+    //       travelMode: 'DRIVING'
+    //     };
+    //     directionsService.route(request, function (response, status) {
+    //       if (status == 'OK') {
+    //         directionsRenderer.setDirections(response);
+    //       }
+    //     });
+    //   }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAIB-ao6P7HmAL73-nhKyqBvjnbT_AxXw&callback=initMap" async defer></script>
+</body>
+</html>
