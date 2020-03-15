@@ -71,15 +71,17 @@
     // }
 
     function kmlGuy(){
-      var src = 'https://drive.google.com/open?id=1lLrp0L0ZGT_ODXZADY39S4FXIKymYHJq';
-      // var src = 'https://developers.google.com/maps/documentation/javascript/examples/kml/westcampus.kml';
+      fileNames = ['5-30--6-7', '6-8--6-18', '6-19--6-28'];
+      fileNames.each(fileName => {
+        const src = `https://raw.githubusercontent.com/marker004/bike-trip/master/${fileName}.kml'`;
 
-      var kmlLayer = new google.maps.KmlLayer(src, {
-        suppressInfoWindows: true,
-        preserveViewport: false,
-        map: map
-      });
-      debugger
+        var kmlLayer = new google.maps.KmlLayer(src, {
+          suppressInfoWindows: true,
+          preserveViewport: false,
+          map: map
+        });
+      })
+
     }
 
     // function calcRoute2() {
