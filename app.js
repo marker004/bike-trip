@@ -18,6 +18,13 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+const options = {
+  setHeaders: function (res, path, stat) {
+    res.set('Content-Type', 'text/plain')
+  }
+}
+app.use('/files', express.static(path.join(__dirname, 'files'), options));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
