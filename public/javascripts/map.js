@@ -14,13 +14,7 @@ function initMap() {
 function kmlImport() {
   fileNames = ['5-30--6-7', '6-8--6-18', '6-19--6-28'];
   fileNames.forEach(fileName => {
-    let src;
-    if (environment == 'local') {
-      src = `https://raw.githubusercontent.com/marker004/bike-trip/master/public/files/kmls/${fileName}.kml`;
-    } else if (environment == 'production') {
-      src = `${location.origin}/files/kmls/${fileName}.kml`;
-    }
-
+    const src = kmlSrc(fileName);
     const kml = new google.maps.KmlLayer(src, {
       suppressInfoWindows: false,
       preserveViewport: false,
@@ -29,6 +23,17 @@ function kmlImport() {
 
     allKmls.push(kml)
   })
+}
+
+function kmlSrc(fileName) {
+  let origin;
+
+  if (environment == 'local') {
+    origin = 'https://raw.githubusercontent.com/marker004/bike-trip/master';
+  } else if (environment == 'production') {
+    origin = location.origin;
+  }
+  return `${origin}/files/kmls/${fileName}.kml`
 }
 
 function addLoadListener() {
