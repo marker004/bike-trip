@@ -18,7 +18,7 @@ function kmlImport() {
     if (environment == 'local') {
       src = `https://raw.githubusercontent.com/marker004/bike-trip/master/public/files/kmls/${fileName}.kml`;
     } else if (environment == 'production') {
-      src = `/files/kmls/${fileName}.kml`;
+      src = `${location.origin}/files/kmls/${fileName}.kml`;
     }
 
     const kml = new google.maps.KmlLayer(src, {
