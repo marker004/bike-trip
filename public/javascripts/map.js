@@ -12,7 +12,7 @@ function initMap() {
 }
 
 function kmlImport() {
-  fileNames = ['5-30--6-7', '6-8--6-18', '6-19--6-28', '6-29--'];
+  fileNames = ['5-30--6-7', '6-8--6-18', '6-19--6-28', '6-29--7-7'];
   fileNames.forEach(fileName => {
     const src = kmlSrc(fileName);
     const kml = new google.maps.KmlLayer(src, {
@@ -51,3 +51,9 @@ function addLoadListener() {
 }
 
 initMap();
+
+
+/* todo:
+use network link kml?
+automatically read new files in kmls folder
+*/
