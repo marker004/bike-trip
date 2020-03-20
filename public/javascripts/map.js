@@ -12,7 +12,6 @@ function initMap() {
 }
 
 function kmlImport() {
-  fileNames = ['5-30--6-7', '6-8--6-18', '6-19--6-28', '6-29--7-7'];
   fileNames.forEach(fileName => {
     const src = kmlSrc(fileName);
     const kml = new google.maps.KmlLayer(src, {
@@ -33,7 +32,7 @@ function kmlSrc(fileName) {
   } else if (environment == 'production') {
     origin = location.origin;
   }
-  return `${origin}/files/kmls/${fileName}.kml`
+  return `${origin}/files/kmls/${fileName}`
 }
 
 function addLoadListener() {

@@ -1,11 +1,13 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const fileNames = require('../filenames');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  const vars = { 
-    apiKey: process.env.GOOGLE_MAPS_API_KEY, 
-    environment: process.env.ENVIRONMENT
+  const vars = {
+    apiKey: process.env.GOOGLE_MAPS_API_KEY,
+    environment: process.env.ENVIRONMENT,
+    fileNames: fileNames
   }
   res.render('index', vars);
 });
