@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 var indexRouter = require('./routes/index');
+var mapIdsRouter = require('./routes/mapIds');
 var app = express();
 
 // view engine setup
@@ -19,15 +20,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-const options = {
-  setHeaders: function (res, path, stat) {
-    res.set('Content-Type', 'text/plain')
-  }
-}
-app.use('/files', express.static(path.join(__dirname, 'files'), options));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/mapIds', mapIdsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
