@@ -3,8 +3,8 @@ let allKmls = [];
 
 function initMap() {
   const mapOptions = {
-    zoom: 6,
-    center: new google.maps.LatLng(46.908312, -124.112932)
+    zoom: 5,
+    center: new google.maps.LatLng(39.8333333, -98.585522)
   }
   map = new google.maps.Map(document.getElementById('map'), mapOptions);
   kmlImport();
