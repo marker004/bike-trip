@@ -37,12 +37,12 @@ function addLoadListener() {
   })
 }
 
-fetch('/mapIds').then((response) => {
-  return response.json();
-}).then((mapIds) => {
-  initMap(mapIds);
-});
+function getMapIdsFromGoogle(){
+  fetch('/mapIds').then((response) => {
+    return response.json();
+  }).then((mapIds) => {
+    initMap(mapIds);
+  });
+}
 
-/* todo:
-figure out how to use credentials.json without commiting it to version control
-*/
+getMapIdsFromGoogle();

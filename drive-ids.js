@@ -15,9 +15,8 @@ module.exports = getEm = async () => {
   try {
     params = { q: "mimeType = 'application/vnd.google-apps.map'", pageSize: 30 }
     res = await drive.files.list(params)
-    list = await res.data.files
-    ids = await list.map(file => file.id)
-    return await ids
+    list = res.data.files
+    return list.map(file => file.id)
   } catch(e) {
     console.log(e)
   }
