@@ -13,7 +13,8 @@ function initMap(mapIds) {
 
 function kmlImport(mapIds) {
   mapIds.forEach(mapId => {
-    const src = `https://www.google.com/maps/d/kml?forcekml=1&mid=${mapId}`
+    const buster = Number(new Date())
+    const src = `https://www.google.com/maps/d/kml?forcekml=1&mid=${mapId}&buster=${buster}`
     const kml = new google.maps.KmlLayer(src, {
       suppressInfoWindows: false,
       preserveViewport: false,
