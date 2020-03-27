@@ -1,5 +1,6 @@
 let map;
 let allKmls = [];
+let numKmlsLoaded = 0;
 
 function initMap(mapIds) {
   const mapOptions = {
@@ -8,7 +9,6 @@ function initMap(mapIds) {
   }
   map = new google.maps.Map(document.getElementById('map'), mapOptions);
   kmlImport(mapIds);
-  addLoadListener();
 }
 
 function kmlImport(mapIds) {
@@ -20,22 +20,22 @@ function kmlImport(mapIds) {
       preserveViewport: false,
       map: map
     });
+    kml.addListener('status_changed', () => {
+      if (kml.getStatus() == 'OK') numKmlsLoaded += 1
+      if (numKmlsLoaded == allKmls.length) setTimeout(() => doTheBounds(), 0)
+    })
     allKmls.push(kml)
   })
 }
 
-function addLoadListener() {
-  google.maps.event.addListenerOnce(map, 'tilesloaded', () => {
-    let totalBounds = new google.maps.LatLngBounds
-    console.log(allKmls)
-    allKmls.forEach((kml) => {
-      const viewport = kml.getDefaultViewport();
-      console.log(viewport);
-      totalBounds = totalBounds.union(viewport);
-    });
-    console.log(totalBounds)
-    map.fitBounds(totalBounds);
-  })
+function doTheBounds() {
+  let totalBounds = new google.maps.LatLngBounds
+  console.log(allKmls)
+  allKmls.forEach((kml) => {
+    const viewport = kml.getDefaultViewport();
+    totalBounds = totalBounds.union(viewport);
+  });
+  map.fitBounds(totalBounds);
 }
 
 function getMapIdsFromGoogle(){
