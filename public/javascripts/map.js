@@ -13,19 +13,27 @@ function initMap(mapIds) {
 
 function kmlImport(mapIds) {
   mapIds.forEach(mapId => {
-    const buster = Number(new Date())
-    const src = `https://www.google.com/maps/d/kml?forcekml=1&mid=${mapId}&buster=${buster}`
+    const src = buildUrl(mapId)
     const kml = new google.maps.KmlLayer(src, {
       suppressInfoWindows: false,
       preserveViewport: false,
       map: map
     });
     kml.addListener('status_changed', () => {
+      console.log(kml.url, kml.getStatus())
       if (kml.getStatus() == 'OK') numKmlsLoaded += 1
       if (numKmlsLoaded == allKmls.length) setTimeout(() => doTheBounds(), 0)
     })
     allKmls.push(kml)
   })
+}
+
+function buildUrl(mapId) {
+  const buster = Number(new Date())
+  const url = new URL('https://www.google.com/maps/d/kml')
+  const params = { forcekml: 1, mid: mapId, buster: buster }
+  Object.entries(params).forEach(param => { url.searchParams.append(param[0], param[1]) })
+  return url.toString()
 }
 
 function doTheBounds() {
@@ -42,6 +50,7 @@ function getMapIdsFromGoogle(){
   fetch('/mapIds').then((response) => {
     return response.json();
   }).then((mapIds) => {
+    console.log(mapIds)
     initMap(mapIds);
   });
 }

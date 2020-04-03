@@ -13,7 +13,7 @@ const drive = google.drive({ version: "v3", auth });
 
 module.exports = getEm = async () => {
   try {
-    params = { q: "mimeType = 'application/vnd.google-apps.map'", pageSize: 30 }
+    params = { q: "mimeType = 'application/vnd.google-apps.map'", pageSize: 15 }
     res = await drive.files.list(params)
     list = res.data.files
     return list.map(file => file.id)
