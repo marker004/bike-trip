@@ -28,13 +28,18 @@ function kmlImport(mapIds) {
   })
 }
 
-function buildUrl(mapId) {
+function buildUrl(fileName) {
   const buster = Number(new Date())
-  const url = new URL('https://www.google.com/maps/d/kml')
-  const params = { forcekml: 1, mid: mapId, buster: buster }
-  Object.entries(params).forEach(param => { url.searchParams.append(param[0], param[1]) })
-  return url.toString()
+  return `https://raw.githubusercontent.com/marker004/bike-trip/master/public/files/${fileName}?buster=${buster}`
 }
+
+// function buildUrl(mapId) {
+//   const buster = Number(new Date())
+//   const url = new URL('https://www.google.com/maps/d/kml')
+//   const params = { forcekml: 1, mid: mapId, buster: buster }
+//   Object.entries(params).forEach(param => { url.searchParams.append(param[0], param[1]) })
+//   return url.toString()
+// }
 
 function doTheBounds() {
   let totalBounds = new google.maps.LatLngBounds

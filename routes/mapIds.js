@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const driveIds = require('../drive-ids');
+const filenames = require('../filenames')
 
-router.get('/', async function(req, res, next) {
-  res.json(await driveIds());
+router.get('/', function(req, res, next) {
+  res.json(filenames);
 })
 
 module.exports = router;
