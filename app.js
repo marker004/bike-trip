@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 var indexRouter = require('./routes/index');
-var mapIdsRouter = require('./routes/mapIds');
+var fileNamesRouter = require('./routes/fileNames');
 var app = express();
 
 // view engine setup
@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/mapIds', mapIdsRouter);
+app.use('/fileNames', fileNamesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
