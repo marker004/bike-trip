@@ -12,20 +12,27 @@ function initMap(mapIds) {
 }
 
 function kmlImport(mapIds) {
-  mapIds.forEach(mapId => {
-    const src = buildUrl(mapId)
-    const kml = new google.maps.KmlLayer(src, {
-      suppressInfoWindows: false,
-      preserveViewport: false,
-      map: map
-    });
-    kml.addListener('status_changed', () => {
-      console.log(kml.url, kml.getStatus())
-      if (kml.getStatus() == 'OK') numKmlsLoaded += 1
-      if (numKmlsLoaded == allKmls.length) setTimeout(() => doTheBounds(), 0)
-    })
-    allKmls.push(kml)
+  // mapIds.forEach(mapId => {
+  //   const src = buildUrl(mapId)
+  //   // const src = 'https://drive.google.com/u/0/uc?id=1azKUneQJqPqH5gm_Qm3GCjKr2n6CMdvZ&export=download'
+  //   const kml = new google.maps.KmlLayer(src, {
+  //     suppressInfoWindows: false,
+  //     preserveViewport: false,
+  //     map: map
+  //   });
+  //   kml.addListener('status_changed', () => {
+  //     console.log(kml.url, kml.getStatus())
+  //     if (kml.getStatus() == 'OK') numKmlsLoaded += 1
+  //     if (numKmlsLoaded == allKmls.length) setTimeout(() => doTheBounds(), 0)
+  //   })
+  //   allKmls.push(kml)
+  // })
+  const kml = new google.maps.KmlLayer('https://file.io/b0RwMZnc', {
+    suppressInfoWindows: false,
+    preserveViewport: true,
+    map: map
   })
+  console.dir(kml)
 }
 
 function buildUrl(mapId) {
@@ -56,3 +63,5 @@ function getMapIdsFromGoogle(){
 }
 
 getMapIdsFromGoogle();
+
+// todo: figure out how to handle new kmls when roads are closed
