@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name><![CDATA[Dad's Bike Trip 6/29 - 7/7]]></name>
+    <description/>
+    <NetworkLink>
+      <name><![CDATA[Dad's Bike Trip 6/29 - 7/7]]></name>
+      <Link>
+        <href><![CDATA[https://www.google.com/maps/d/kml?forcekml=1&mid=1hfWP3HfXUF532lnKDGwuSuVyV5-UN6mJ]]></href>
+      </Link>
+    </NetworkLink>
+  </Document>
+</kml>
