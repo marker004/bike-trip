@@ -2,18 +2,18 @@ let map;
 let allKmls = [];
 let numKmlsLoaded = 0;
 
-function initMap(mapIds) {
+function initMap(fileNames) {
   const mapOptions = {
     zoom: 5,
     center: new google.maps.LatLng(39.8333333, -98.585522)
   }
   map = new google.maps.Map(document.getElementById('map'), mapOptions);
-  kmlImport(mapIds);
+  kmlImport(fileNames);
 }
 
-function kmlImport(mapIds) {
-  mapIds.forEach(mapId => {
-    const src = buildUrl(mapId)
+function kmlImport(fileNames) {
+  fileNames.forEach(fileName => {
+    const src = buildUrl(fileName)
     const kml = new google.maps.KmlLayer(src, {
       suppressInfoWindows: false,
       preserveViewport: false,
@@ -28,12 +28,9 @@ function kmlImport(mapIds) {
   })
 }
 
-function buildUrl(mapId) {
+function buildUrl(fileName) {
   const buster = Number(new Date())
-  const url = new URL('https://www.google.com/maps/d/kml')
-  const params = { forcekml: 1, mid: mapId, buster: buster }
-  Object.entries(params).forEach(param => { url.searchParams.append(param[0], param[1]) })
-  return url.toString()
+  return `https://raw.githubusercontent.com/marker004/bike-trip/master/public/files/${fileName}?buster=${buster}`
 }
 
 function doTheBounds() {
@@ -46,13 +43,12 @@ function doTheBounds() {
   map.fitBounds(totalBounds);
 }
 
-function getMapIdsFromGoogle(){
-  fetch('/mapIds').then((response) => {
+function getFileNames(){
+  fetch('/filenames').then((response) => {
     return response.json();
-  }).then((mapIds) => {
-    console.log(mapIds)
-    initMap(mapIds);
+  }).then((fileNames) => {
+    initMap(fileNames);
   });
 }
 
-getMapIdsFromGoogle();
+getFileNames();
