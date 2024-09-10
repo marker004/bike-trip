@@ -10,7 +10,7 @@
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.10",
-    "express": "~4.19.2",
+    "express": "~4.20.0",
     "googleapis": "^82.0.0",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1"
